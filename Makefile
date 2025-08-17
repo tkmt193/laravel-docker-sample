@@ -15,6 +15,9 @@ restart:
 logs:
 	docker compose logs -f
 
+enter-%:
+	docker compose exec $* bash
+
 # 本番用
 # Makefile
 
@@ -63,3 +66,16 @@ status:
 	@echo ""
 	@echo "=== RDS Status ==="
 	aws rds describe-db-instances --db-instance-identifier terraform-20250816132605887900000001 --region ap-northeast-1 --query 'DBInstances[0].{Status:DBInstanceStatus,Engine:Engine,Endpoint:Endpoint}' --output table
+
+# マイグレーション
+create-%:
+	docker compose exec app php artisan make:migration $*
+
+migrate:
+	docker compose exec app php artisan migrate
+
+status:
+	docker compose exec app php artisan migrate:status
+
+rollback:
+	docker compose exec app php artisan migrate:rollback
