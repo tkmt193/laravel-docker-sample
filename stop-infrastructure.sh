@@ -12,7 +12,7 @@ echo -e "${YELLOW}=== ECSとRDS停止スクリプト ===${NC}"
 REGION="ap-northeast-1"
 CLUSTER_NAME="my-cluster"
 SERVICE_NAME="my-app-service"
-DB_INSTANCE_ID="terraform-20250816132605887900000001"
+DB_INSTANCE_ID="terraform-20250817042855071000000001"
 
 echo -e "${YELLOW}1. ECSサービスのスケールダウン...${NC}"
 aws ecs update-service \
